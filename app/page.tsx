@@ -1,11 +1,29 @@
+import {  getServerSession} from "next-auth";
+import { authoptions } from "./lib/nextAuth";
+import SigninButton from "./_copmonents/SigninButton";
+import Image from "next/image";
 
 
-export default function Home() {
+export default async function Home() {
+  const session= await getServerSession(authoptions)
+  console.log(session);
   return (
-    <>
-    <h1 className="bg-blue-500 text-white p-4">
-    Welcome to Next.js with Tailwind CSS!
-    </h1>
-    </>
+    <div className="bg-blue-500 mx-auto w-full text-white p-4">
+      {
+        session?
+        (
+          <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className=""> Welcome {session.user?.name}</h1>
+          <Image src={session.user?.image || ""} alt="user image" width={50} height={50} className="rounded-full"/>
+          <p className="text-sm">Email: {session.user?.email}</p>
+        </div>
+
+        )
+          :
+          (
+            <SigninButton/>
+          )
+      }
+    </div>
   );
 }
