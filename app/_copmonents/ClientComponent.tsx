@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import SigninButton from "./SigninButton"
+import Signout from "./Signout"
 
 const ClientComponent = () => {
     const {data:session, status, update}= useSession()
@@ -20,6 +21,7 @@ const ClientComponent = () => {
                 <h1 className=""> Welcome {session.user?.name}</h1>
                     <Image src={session.user?.image || ""} alt="user image" width={50} height={50} className="rounded-full"/>
                     <p className="text-sm">Email: {session.user?.email}</p>
+                    <Signout/>
                 </div>
             )
         }

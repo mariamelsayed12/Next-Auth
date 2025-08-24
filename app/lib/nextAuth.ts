@@ -25,6 +25,10 @@ export const authoptions:AuthOptions = {
         //signIn, redirect, session , jwt callbacks الحاجه الي بتحصل بعد ال لوج ان
         
     },
+    pages:{
+        signIn:"/auth/signin", // custom signin page
+    }
+    ,
     // use the secret key i make in .env.local file
     secret:process.env.NEXTAUTH_SECRET,
 
